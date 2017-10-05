@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <!-- we haven't learned to serve files yet ... -->
+    <link rel="stylesheet" href="public/main.css">
+</head>
+<body>
+	<!-- header tempalte -->
+	{{template "header"}}
+
+	{{template "svgs"}}
+
+	<h1>The meaning of list {{.}}</h1>
+	<p>{{template "polarbear" .}}</p>
+
+	<div id="atf">
+	    <main>
+	        <svg class="icon icon-big-in">
+	            <use xlink:href="#inbox"></use>
+	        </svg>
+	        <h1>Are You In?</h1>
+	    </main>
+	</div>
+
+	<footer>
+		{{template "footer"}}
+	</footer>
