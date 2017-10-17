@@ -13,6 +13,12 @@ var tpl  *template.Template
 type person struct{
 	FirstName string
 	LastName string
+	Age int
+}
+
+// pre-defined methods
+func (sofware person) DoubleAge() int {
+	return software.Age * 2
 }
 
 func init() {
@@ -24,16 +30,19 @@ func main() {
 	software := person{
 		FirstName: "Luis",
 		LastName: "Matute",
+		Age: 32,
 	}
 
 	qa := person{
 		FirstName: "Fernando",
 		LastName: "Lontero",
+		Age: 26,
 	}
 
 	pm := person{
 		FirstName: "Arlene",
 		LastName: "Espana",
+		Age: 23,
 	}
 
 	companyPositions := []person{software, qa, pm}

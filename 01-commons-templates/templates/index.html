@@ -11,15 +11,16 @@
 
 	{{template "svgs"}}
 
-	<h1>The meaning of list {{.}}</h1>
-	<p>{{template "polarbear" .}}</p>
+	
+	<p>{{template "polarbear" }}</p>
 
 	<div id="atf">
 	    <main>
 	        <svg class="icon icon-big-in">
 	            <use xlink:href="#inbox"></use>
 	        </svg>
-	        <h1>Are You In?</h1>
+	        <h3>{{.FirstName}} have {{.DoubleAge}} years old</h3>
+	        <h4>Year of birth {{.Age | .YearBirth}}</h4>
 	    </main>
 	</div>
 
