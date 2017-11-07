@@ -3,15 +3,24 @@ package main
 import (
 	"fmt"
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
 	"io"
+	"encoding/json"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
  
 var db *sql.DB
 var err error
+
+type Employe struct {
+	Name     string `json:"firstname, omitempty"`
+	LastName string `json:"lastname, omitempty"`
+	Email    string `json:"email"`
+
+}
 
 func main() {
 	// creating the cpnnecton from the database
@@ -46,6 +55,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 func users(w http.ResponseWriter, r *http.Request) {
 	// creating the query
 	var s, name, lastname, email string
+	var employe []Employe
 
 	// creating the string query
 	rows, err := db.Query("SELECT name, lastname, email FROM Users;")
@@ -63,11 +73,19 @@ func users(w http.ResponseWriter, r *http.Request) {
 		if err := rows.Scan(&name, &lastname, &email); err != nil {
 			log.Fatal(err)
 		}
-
-		s += name + lastname + email + "\n"
+		employe = append(employe, Employe{Name: name, LastName: lastname, Email: email})
+		s += name + lastname + email 
 	}
 
-	fmt.Fprintln(w, s)
+	fmt.Println(s)
+	// set header json part
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+
+	if err := json.NewEncoder(w).Encode(employe); err != nil {
+		fmt.Println("ERROR: ", err)
+	}
 
 
 }
+
