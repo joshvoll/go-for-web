@@ -1,13 +1,13 @@
 package main
 
-import(
-	"fmt"
-	"os"
-	"io/ioutil"
-	"time"
-	"strings"
+import (
 	"encoding/csv"
+	"fmt"
+	"io/ioutil"
+	"os"
 	"strconv"
+	"strings"
+	"time"
 )
 
 // consta path to the folder
@@ -15,14 +15,13 @@ const watchedPath = "./source"
 
 // main struct
 type Invoice struct {
-	Number 				string
+	Number              string
 	Amount              float64
 	PurchaseOrderNumber int
-	InvoiceDate         time.Time  
+	InvoiceDate         time.Time
 }
 
-
-
+// rust long
 func main() {
 	// we're doing a infinite loop
 	for {
@@ -67,7 +66,7 @@ func main() {
 
 					// conver the timestamp from string
 					unixTime, _ := strconv.ParseInt(record[3], 10, 64)
-					invoice.InvoiceDate = time.Unix(unixTime,0)
+					invoice.InvoiceDate = time.Unix(unixTime, 0)
 
 					// return the record to the console
 					fmt.Printf("Recieve invoice  '%v' for $%.2f  and submitted ", invoice.Number, invoice.Amount)
@@ -77,7 +76,3 @@ func main() {
 		}
 	}
 }
-
-
-
-
